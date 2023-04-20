@@ -2,7 +2,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <PubSubClient.h>
-#include "my_config.h";
+#include "my_config.h"
 
 #define DEBUG 1
 
@@ -235,6 +235,7 @@ boolean mqttMsgReceivedCallBack(char *topic, byte *payload, unsigned int length)
     Serial.println("resetRecevingTrameProcess");
     resetRecevingTrameProcess();
     isProcessingCmd = false;
+    return false;
 }
 
 void resetRecevingTrameProcess()
@@ -355,9 +356,9 @@ bool setTempInTrame(float temperature)
     byte temp = temperature;
     bool halfDegree = ((temperature *10) - (temp *10)) > 0;
 
-    if (temp < 15 || temp > 33)
+    if (temp < 15 || temp > 42)
     {
-        Serial.println("Error setTemp: Value must be between 15 & 33");
+        Serial.println("Error setTemp: Value must be between 15 & 42");
         return false;
     }
 
